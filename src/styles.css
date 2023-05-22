@@ -1,1 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gjs-block {
+    width: 80px;
+    height: auto;
+    min-height: 20px;
+    min-width: 20px;
+    margin: 10px 0.5% 5px;
+}
+
+.panel__right {
+    flex-basis: 300px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.panel__top {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    position: initial;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.panel__basic-actions {
+    position: initial;
+}
+
+.editor-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    height: auto;
+}
+
+.editor-canvas {
+    flex-grow: 1;
+}
+
+#gjs {
+    border: 3px solid #444;
+    width: auto;
+    height: auto;
+}
+
+.gjs-cv-canvas {
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.panel__switcher {
+    position: initial;
+}
+
+.panel__devices {
+    position: initial;
+}
+
+/* Start Theming */
+
+/* Primary color for the background */
+.gjs-one-bg {
+    background-color: #373d49;
+}
+
+/* Secondary color for the text color */
+.gjs-two-color {
+    color: #dae5e6;
+}
+
+/* Tertiary color for the background */
+.gjs-three-bg {
+    background-color: #ff0000;
+    color: white;
+}
+
+/* Quaternary color for the text color */
+.gjs-four-color,
+.gjs-four-color-h:hover {
+    color: white;
+}
+
+/* End Theming */
