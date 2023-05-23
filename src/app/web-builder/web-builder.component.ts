@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import grapesjs from 'grapesjs';
+import tr from 'grapesjs/locale/tr';
 
 @Component({
   selector: 'app-web-builder',
@@ -23,12 +24,11 @@ export class WebBuilderComponent implements OnInit {
       // Get the content for the canvas directly from the element
       // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
       fromElement: true,
-      // Size of the editor
-      // height: '700px',
-      // width: 'auto',
       // Avoid any default panel
       layerManager: {
-        appendTo: '.layers-container'
+        appendTo: '.layers-container',
+        sortable: false,
+        hidable: false,
       },
       deviceManager: {
         devices: [{
@@ -79,7 +79,7 @@ export class WebBuilderComponent implements OnInit {
                 active: true,
                 label: 'Layers',
                 command: 'show-layers',
-                // Once activated disable the possibility to turn it off
+                // Etkinleştirildiğinde, kapatma olasılığını devre dışı bırakın
                 togglable: false,
               },
               {
@@ -95,6 +95,13 @@ export class WebBuilderComponent implements OnInit {
                 label: 'Traits',
                 command: 'show-traits',
                 togglable: false,
+              },
+              {
+                id: 'save',
+                active: true,
+                label: 'Save',
+                command: 'save',
+                togglable: false,
               }
             ],
           },
@@ -103,13 +110,13 @@ export class WebBuilderComponent implements OnInit {
             el: '.panel__devices',
             buttons: [{
               id: 'device-desktop',
-              label: 'D',
+              label: 'Desktop',
               command: 'set-device-desktop',
               active: true,
               togglable: false,
             }, {
               id: 'device-mobile',
-              label: 'M',
+              label: 'Mobile',
               command: 'set-device-mobile',
               togglable: false,
             }],
@@ -175,32 +182,46 @@ export class WebBuilderComponent implements OnInit {
         blocks: [
           {
             id: 'section', // id is mandatory
-            label: '<b>Section</b>', // You can use HTML/SVG inside labels
+            label: 'Section', // You can use HTML/SVG inside labels
+            category: 'Basic',
             attributes: { class: 'gjs-block-section' },
             content: `<section>
-                <h1 class="text-3xl font-bold underline">This is a simple title</h1>
-                <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
-              </section>`,
+                        <h1 class="text-3xl font-bold underline">This is a simple title</h1>
+                        <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
+                      </section>`,
           },
           {
             id: 'text',
             label: 'Text',
+            category: 'Basic',
             content: '<div data-gjs-type="text">Insert your text here</div>',
           },
           {
             id: 'image',
             label: 'Image',
-            // Select the component once it's dropped
+            category: 'Basic',
+            // Düştüğünde bileşeni seçin
             select: true,
-            // You can pass components as a JSON instead of a simple HTML string,
-            // in this case we also use a defined component type `image`
+            // Bileşenleri basit bir HTML dizesi yerine JSON olarak iletebilirsiniz, bu durumda tanımlı bir bileşen türü olan "image" de kullanırız.
             content: { type: 'image' },
-            // This triggers `active` event on dropped components and the `image` reacts by opening the AssetManager
+            // Bu, bırakılan bileşenlerde "active" olayını tetikler ve "image", AssetManager'ı açarak tepki verir.
             activate: true,
+          },
+          {
+            id: 'link',
+            label: 'Link',
+            category: 'Basic',
+            activate: true,
+            content: {
+              type: 'link',
+              content: 'Insert your link here',
+              style: { color: '#d983a6' }
+            }
           },
           {
             id: 'pricing',
             label: 'Pricing',
+            category: 'Extra',
             // attributes: { class: '' },
             content: `
             <div class="bg-white py-24 sm:py-32">
@@ -265,7 +286,7 @@ export class WebBuilderComponent implements OnInit {
           {
             id: 'team-sections',
             label: 'Team Sections',
-            // attributes: { class: '' },
+            category: 'Extra',
             content: `
             <div class="bg-white py-24 sm:py-32">
               <div class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
@@ -290,14 +311,24 @@ export class WebBuilderComponent implements OnInit {
           }
         ]
       },
-      canvas: {
-        styles: [
-
+      assetManager: {
+        assets: [
+          'https://pbs.twimg.com/profile_images/744941502678339584/Dg8cykY0_400x400.jpg',
+          'https://thumbs.gfycat.com/LastOrganicHuman-mobile.jpg',
         ],
+      },
+      canvas: {
+        styles: [],
         scripts: [
           'https://cdn.tailwindcss.com'
         ]
-      }
+      },
+      i18n: {
+        // locale: 'en', // default locale
+        // detectLocale: true, // by default, the editor will detect the language
+        // localeFallback: 'en', // default fallback
+        // messages: { tr },
+      },
     });
 
     this.addPanel();
@@ -390,15 +421,17 @@ export class WebBuilderComponent implements OnInit {
     this.editor.Commands.add('set-device-desktop', {
       run: editor => editor.setDevice('Desktop')
     });
+
     // Mobile görünümü.
     this.editor.Commands.add('set-device-mobile', {
       run: editor => editor.setDevice('Mobile')
     });
-  }
 
-  savePage() {
-    console.log(this.editor.getHtml());
-    console.log(this.editor.getCss());
-  }
+    // Save.
+    this.editor.Commands.add('save', editor => {
+      console.log(editor.getHtml());
+      console.log(editor.getCss());
+    });
 
+  }
 }
