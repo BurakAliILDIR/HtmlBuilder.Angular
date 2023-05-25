@@ -8,21 +8,24 @@ import { EmailConfirmationComponent } from './auth/email-confirmation/email-conf
 import { WebBuilderComponent } from './web-builder/web-builder.component';
 import { PagesComponent } from './pages/pages.component';
 import { FindPageResolver } from './_resolvers/pages.resolver';
+import { PreviewComponent } from './preview/preview.component';
 
 const routes: Routes = [
+  { path: "", redirectTo: "pages", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "forgot-password", component: ForgotPasswordComponent },
   { path: "reset-password", component: ResetPasswordComponent },
   { path: "email-confirmation", component: EmailConfirmationComponent },
   { path: "web-builder/:id", component: WebBuilderComponent, resolve: { findPage: FindPageResolver } },
+  { path: "preview/:id", component: PreviewComponent, resolve: { findPage: FindPageResolver } },
   { path: "pages", component: PagesComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabledBlocking'
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

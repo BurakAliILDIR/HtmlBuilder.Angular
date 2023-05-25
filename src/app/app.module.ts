@@ -9,24 +9,26 @@ import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SafeHtmlPipe } from './_pipes/safe-html.pipe';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WebBuilderComponent,
     PagesComponent,
+    PreviewComponent,
     SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    }), 
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
