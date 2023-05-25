@@ -23,8 +23,8 @@ export class WebBuilderComponent implements OnInit {
     await this.activatedRoute.data?.subscribe(({ findPage }) => {
       this.page = findPage.data
       console.log(this.page);
-      // const element = document.getElementById('deneme');
-      // element.innerText = this.page.html;
+      this.editor.setComponents(this.page.html);
+      this.editor.setStyle(this.page.css);
     });
 
   }
