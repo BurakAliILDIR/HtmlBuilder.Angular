@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FindPageResponse, GetPagesResponse, UpdatePageResponse } from '../_responses/page.response';
-import { UpdatePageRequest } from '../_requests/page.request';
+import { AddPageResponse, FindPageResponse, GetPagesResponse, UpdatePageResponse } from '../_responses/page.response';
+import { AddPageRequest, UpdatePageRequest } from '../_requests/page.request';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class PageService {
 
   findPage(id: string): Observable<FindPageResponse> {
     return this.http.get<FindPageResponse>(this.baseUrl + "/Pages/Find/" + id);
+  }
+
+  addPage(request: AddPageRequest): Observable<AddPageResponse> {
+    return this.http.post<AddPageResponse>(this.baseUrl + "/Pages/Add", request);
   }
 
   updatePage(request: UpdatePageRequest): Observable<UpdatePageResponse> {

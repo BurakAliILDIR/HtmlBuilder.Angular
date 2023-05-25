@@ -11,6 +11,7 @@ import { FindPageResolver } from './_resolvers/pages.resolver';
 import { PreviewComponent } from './preview/preview.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { unauthGuard } from './_guards/unauth.guard';
+import { AddPageComponent } from './pages/add-page/add-page.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "pages", pathMatch: "full" },
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: "web-builder/:id", component: WebBuilderComponent, resolve: { findPage: FindPageResolver } },
       { path: "preview/:id", component: PreviewComponent, resolve: { findPage: FindPageResolver } },
       { path: "pages", component: PagesComponent },
+      { path: "pages/add", component: AddPageComponent },
     ], canActivate: [AuthGuard]
   },
 

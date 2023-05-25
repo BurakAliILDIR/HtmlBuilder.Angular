@@ -11,12 +11,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { SafeHtmlPipe } from './_pipes/safe-html.pipe';
 import { PreviewComponent } from './preview/preview.component';
 import { HeaderComponent } from './header/header.component';
+import { AddPageComponent } from './pages/add-page/add-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     WebBuilderComponent,
     PagesComponent,
+    AddPageComponent,
     PreviewComponent,
     HeaderComponent,
     SafeHtmlPipe
@@ -26,6 +29,7 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     AuthModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
