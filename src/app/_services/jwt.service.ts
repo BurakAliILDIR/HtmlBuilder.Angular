@@ -59,4 +59,7 @@ export class JwtService {
     }
   }
 
+  logout(): void {
+    localStorage.clear();
+  }
 }
