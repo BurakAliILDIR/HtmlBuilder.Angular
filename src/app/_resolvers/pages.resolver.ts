@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
-import { FindPageResponse, GetPagesResponse } from "../_responses/pages.response";
+import { FindPageResponse, GetPagesResponse } from "../_responses/page.response";
 import { PageService } from "../_services/page.service";
 
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PageService } from '../_services/page.service';
-import { GetPagesResponse } from '../_responses/pages.response';
+import { GetPagesResponse } from '../_responses/page.response';
 
 @Component({
   selector: 'app-pages',

@@ -1,6 +1,5 @@
-export class Page {
+export class UpdatePageRequest {
     id: string;
-    name: string;
     html: string;
     css: string;
 }

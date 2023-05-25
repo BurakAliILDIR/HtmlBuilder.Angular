@@ -11,3 +11,9 @@ export class FindPageResponse {
   message: string;
   data: Page
 }
+
+export class UpdatePageResponse {
+  status: number;
+  message: string;
+  data: null
+}

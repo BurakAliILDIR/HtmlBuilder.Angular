@@ -1,7 +1,10 @@
-import { AfterContentInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import grapesjs from 'grapesjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Page } from '../_models/page.model';
+import { PageService } from '../_services/page.service';
+import { UpdatePageRequest } from '../_requests/page.request';
+import { BaseResponse } from '../_models/base-response.model';
 
 @Component({
   selector: 'app-web-builder',
@@ -14,17 +17,17 @@ export class WebBuilderComponent implements OnInit {
 
   page: Page;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
     this.initGrapesJS();
 
-    await this.activatedRoute.data?.subscribe(({ findPage }) => {
+    this.activatedRoute.data?.subscribe(({ findPage }) => {
       this.page = findPage.data
-      console.log(this.page);
       this.editor.setComponents(this.page.html);
       this.editor.setStyle(this.page.css);
+      console.table(this.page);
     });
 
   }
@@ -442,8 +445,20 @@ export class WebBuilderComponent implements OnInit {
 
     // Save.
     this.editor.Commands.add('save', editor => {
-      console.log(editor.getHtml());
-      console.log(editor.getCss());
+
+      let request = new UpdatePageRequest;
+
+      request.id = this.page.id;
+      request.html = editor.getHtml();
+      request.css = editor.getCss();
+
+      this.pageService.updatePage(request).subscribe({
+        next: (value: BaseResponse) => {
+          console.log(value);
+        },
+        error: (error) => console.log(error),
+        complete: () => console.log("completed..")
+      });
     });
 
   }
