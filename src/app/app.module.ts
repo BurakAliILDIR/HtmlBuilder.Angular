@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WebBuilderComponent } from './web-builder/web-builder.component';
 import { PagesComponent } from './pages/pages.component';
-import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
