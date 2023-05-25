@@ -30,7 +30,7 @@ export class LoginComponent {
       },
       error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
       complete: () => {
-        this.router.navigateByUrl('/chat/home');
+        this.router.navigateByUrl('/web-builder');
       }
     });
   }

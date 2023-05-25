@@ -21,7 +21,7 @@ export class PagesComponent {
       },
       error: (error) => console.log(error),
       complete: () => console.log("completed..")
-    })
+    });
   }
 
 }

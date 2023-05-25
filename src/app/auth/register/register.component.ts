@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { BaseResponse, ResponseStatusEnum } from 'src/app/_models/base-response.model';
+import { JwtService } from 'src/app/_services/jwt.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent {
 
-  constructor(private authService: AuthService, private toastr: ToastrService) { }
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService, private jwtService: JwtService) { }
 
   registerForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -20,11 +23,19 @@ export class RegisterComponent {
   });
 
   onSubmit() {
-    console.log(this.registerForm.value);
     this.authService.register(this.registerForm.value).subscribe({
-      next: (v) => console.log(v),
+      next: (v) => (v: BaseResponse) => {
+        if(v.status === ResponseStatusEnum.success){
+          this.jwtService.setToken(v.data);
+          this.toastr.success(v['message'], "Success!");
+        }
+      },
       error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
-      complete: () => this.toastr.success('Sign up!', "Success")
+      complete: () => 
+      {
+        this.router.navigateByUrl('/web-builder');
+        this.toastr.success('Sign up!', "Success")
+      }
   });
   }
 }

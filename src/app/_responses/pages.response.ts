@@ -5,3 +5,9 @@ export class GetPagesResponse {
   message: string;
   data: Page[]
 }
+
+export class FindPageResponse {
+  status: number;
+  message: string;
+  data: Page
+}

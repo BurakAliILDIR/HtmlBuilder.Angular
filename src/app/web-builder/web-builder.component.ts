@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import grapesjs from 'grapesjs';
-import tr from 'grapesjs/locale/tr';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Page } from '../_models/page.model';
 
 @Component({
   selector: 'app-web-builder',
@@ -11,10 +12,21 @@ export class WebBuilderComponent implements OnInit {
 
   public editor: any = null
 
-  constructor() { }
+  page: Page;
 
-  ngOnInit(): void {
+  constructor(private activatedRoute: ActivatedRoute) { }
+
+  async ngOnInit(): Promise<void> {
+
     this.initGrapesJS();
+
+    await this.activatedRoute.data?.subscribe(({ findPage }) => {
+      this.page = findPage.data
+      console.log(this.page);
+      // const element = document.getElementById('deneme');
+      // element.innerText = this.page.html;
+    });
+
   }
 
   initGrapesJS() {
@@ -43,12 +55,12 @@ export class WebBuilderComponent implements OnInit {
       storageManager: {
         type: 'local', // Type of the storage, available: 'local' | 'remote'
         autosave: true, // Store data automatically
-        autoload: true, // Autoload stored data on init
-        stepsBeforeSave: 1, // If autosave enabled, indicates how many changes are necessary before store method is triggered
+        autoload: false, // Autoload stored data on init
+        stepsBeforeSave: 1, // Otomatik kaydetme etkinse, saklama yöntemi tetiklenmeden önce kaç değişikliğin gerekli olduğunu gösterir
         options: {
           local: { // Options for the `local` type
             key: 'gjsProject', // The key for the local storage
-          },
+          }
         }
       },
       // We define a default panel as a sidebar to contain layers
@@ -334,6 +346,7 @@ export class WebBuilderComponent implements OnInit {
     this.addPanel();
 
     this.addCommands();
+
   }
 
   addPanel() {
