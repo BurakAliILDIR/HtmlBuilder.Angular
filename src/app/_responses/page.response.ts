@@ -23,3 +23,10 @@ export class UpdatePageResponse {
   message: string;
   data: null
 }
+
+export class DeletePageResponse {
+  status: number;
+  message: string;
+  data: null
+}
+

@@ -4,40 +4,49 @@
         <div class="relative overflow-x-auto">
 
             <a routerLink="/pages/add"
-                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="block text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 my-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Yeni Sayfa Oluştur
             </a>
             <hr>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Sayfa Adı
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Düzenle
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Önizle
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            Sil
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let page of pages" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr *ngFor="let page of pages" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ page.name }}
                         </th>
                         <td class="px-6 py-4">
                             <a routerLink="{{ '/web-builder/' + page.id }}"
-                                class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                                class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer rounded-full hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
                                 Düzenle
                             </a>
                         </td>
                         <td class="px-6 py-4">
                             <a routerLink="{{ '/preview/' + page.id }}"
-                                class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                                class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer rounded-full hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
                                 Önizle
                             </a>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button (click)="delete(page)"
+                                class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer rounded-full bg-red-700 text-white hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-700 focus:text-white">
+                                Sil
+                            </button>
                         </td>
                     </tr>
                 </tbody>
