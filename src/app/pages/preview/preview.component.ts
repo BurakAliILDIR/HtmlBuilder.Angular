@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Page } from '../_models/page.model';
+import { PageModel } from '../../_models/page.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./preview.component.css']
 })
 export class PreviewComponent implements OnInit {
-  page: Page;
+  page: PageModel;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 

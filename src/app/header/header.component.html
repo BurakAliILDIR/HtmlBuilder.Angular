@@ -3,9 +3,20 @@
         <a routerLink="/" class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             HTML Builder
         </a>
+        
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
-                <button (click)="logout()" class="hover:underline">Çıkış</button>
+                <a routerLink="/" class="hover:underline text-sm text-gray-500 sm:text-center mx-5">
+                    Sayfa Yönetimi
+                </a>
+            </li>
+            <li>
+                <a routerLink="/components" class="hover:underline text-sm text-gray-500 sm:text-center mx-5">
+                    Komponent Yönetimi
+                </a>
+            </li>
+            <li>
+                <button (click)="logout()" class="hover:underline text-sm text-gray-500 sm:text-center ml-5">Çıkış</button>
             </li>
         </ul>
     </div>

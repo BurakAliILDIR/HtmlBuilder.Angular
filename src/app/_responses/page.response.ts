@@ -1,15 +1,15 @@
-import { Page } from "../_models/page.model";
+import { PageModel } from "../_models/page.model";
 
 export class GetPagesResponse {
   status: number;
   message: string;
-  data: Page[]
+  data: PageModel[]
 }
 
 export class FindPageResponse {
   status: number;
   message: string;
-  data: Page
+  data: PageModel
 }
 
 export class AddPageResponse {

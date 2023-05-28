@@ -1,10 +1,10 @@
 import { Component, OnInit, } from '@angular/core';
 import grapesjs from 'grapesjs';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from '../_models/page.model';
-import { PageService } from '../_services/page.service';
-import { UpdatePageRequest } from '../_requests/page.request';
-import { BaseResponse } from '../_models/base-response.model';
+import { BaseResponse } from 'src/app/_models/base-response.model';
+import { PageModel } from 'src/app/_models/page.model';
+import { UpdatePageRequest } from 'src/app/_requests/page.request';
+import { PageService } from 'src/app/_services/page.service';
 
 @Component({
   selector: 'app-web-builder',
@@ -15,7 +15,7 @@ export class WebBuilderComponent implements OnInit {
 
   public editor: any = null
 
-  page: Page;
+  page: PageModel;
 
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
 

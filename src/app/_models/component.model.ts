@@ -1,4 +1,4 @@
-export class Component {
+export class ComponentModel {
     id: string;
     label: string;
     category: string;

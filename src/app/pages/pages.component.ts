@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PageService } from '../_services/page.service';
 import { DeletePageResponse, GetPagesResponse } from '../_responses/page.response';
 import Swal from 'sweetalert2'
-import { Page } from '../_models/page.model';
+import { PageModel } from '../_models/page.model';
 import { DeletePageRequest } from '../_requests/page.request';
 import { ResponseStatusEnum } from '../_models/base-response.model';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PagesComponent {
 
-  pages: any;
+  pages: PageModel[];
 
   constructor(private pageService: PageService, private toastr: ToastrService) { }
 
@@ -33,7 +33,7 @@ export class PagesComponent {
     });
   }
 
-  delete(page: Page) {
+  delete(page: PageModel) {
     Swal.fire({
       title: 'Emin misiniz?',
       text: `${page.name} sayfasını silmek istediğinize emin misiniz?`,
@@ -47,7 +47,6 @@ export class PagesComponent {
         const request = new DeletePageRequest;
 
         request.id = page.id;
-
 
         this.pageService.deletePage(request).subscribe({
           next: (v: DeletePageResponse) => {

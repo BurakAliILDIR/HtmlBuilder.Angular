@@ -5,13 +5,15 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { EmailConfirmationComponent } from './auth/email-confirmation/email-confirmation.component';
-import { WebBuilderComponent } from './web-builder/web-builder.component';
 import { PagesComponent } from './pages/pages.component';
 import { FindPageResolver } from './_resolvers/pages.resolver';
-import { PreviewComponent } from './preview/preview.component';
+import { PreviewComponent } from './pages/preview/preview.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { unauthGuard } from './_guards/unauth.guard';
 import { AddPageComponent } from './pages/add-page/add-page.component';
+import { ComponentsComponent } from './components/components.component';
+import { AddComponentComponent } from './components/add-component/add-component.component';
+import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "pages", pathMatch: "full" },
@@ -30,6 +32,8 @@ const routes: Routes = [
       { path: "preview/:id", component: PreviewComponent, resolve: { findPage: FindPageResolver } },
       { path: "pages", component: PagesComponent },
       { path: "pages/add", component: AddPageComponent },
+      { path: "components", component: ComponentsComponent },
+      { path: "components/add", component: AddComponentComponent },
     ], canActivate: [AuthGuard]
   },
 

@@ -3,16 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WebBuilderComponent } from './web-builder/web-builder.component';
 import { PagesComponent } from './pages/pages.component';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SafeHtmlPipe } from './_pipes/safe-html.pipe';
-import { PreviewComponent } from './preview/preview.component';
+import { PreviewComponent } from './pages/preview/preview.component';
 import { HeaderComponent } from './header/header.component';
 import { AddPageComponent } from './pages/add-page/add-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ComponentsComponent } from './components/components.component';
+import { AddComponentComponent } from './components/add-component/add-component.component';
+import { RouterModule } from '@angular/router';
+import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddPageComponent,
     PreviewComponent,
     HeaderComponent,
+    ComponentsComponent,
+    AddComponentComponent,
     SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
     AuthModule,
     BrowserAnimationsModule,

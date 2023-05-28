@@ -1,4 +1,4 @@
-export class Page {
+export class PageModel {
     id: string;
     name: string;
     html: string;
