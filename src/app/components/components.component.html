@@ -15,9 +15,6 @@
                             Komponent Adı
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            Düzenle
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
                             Önizle
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
@@ -31,12 +28,6 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ component.label }}
                         </th>
-                        <td class="px-6 py-4">
-                            <a routerLink="{{ '/web-builder/' + component.id }}"
-                                class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer rounded-full hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
-                                Düzenle
-                            </a>
-                        </td>
                         <td class="px-6 py-4">
                             <a routerLink="{{ '/components/' + component.id + '/preview' }}"
                                 class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer rounded-full hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700">

@@ -15,7 +15,7 @@ import { ComponentsComponent } from './components/components.component';
 import { AddComponentComponent } from './components/add-component/add-component.component';
 import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
 import { PreviewComponentComponent } from './components/preview-component/preview-component.component';
-import { FindComponentResolver } from './_resolvers/components.resolver';
+import { FindComponentResolver, GetComponentsResolver } from './_resolvers/components.resolver';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -31,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: "", children: [
-      { path: "web-builder/:id", component: WebBuilderComponent, resolve: { findPage: FindPageResolver } },
+      { path: "web-builder/:id", component: WebBuilderComponent, resolve: { findPage: FindPageResolver, getComponents: GetComponentsResolver } },
       { path: "preview/:id", component: PreviewComponent, resolve: { findPage: FindPageResolver } },
       { path: "pages", component: PagesComponent },
       { path: "pages/add", component: AddPageComponent },
