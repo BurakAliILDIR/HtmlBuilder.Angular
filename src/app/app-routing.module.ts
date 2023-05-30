@@ -14,6 +14,9 @@ import { AddPageComponent } from './pages/add-page/add-page.component';
 import { ComponentsComponent } from './components/components.component';
 import { AddComponentComponent } from './components/add-component/add-component.component';
 import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
+import { PreviewComponentComponent } from './components/preview-component/preview-component.component';
+import { FindComponentResolver } from './_resolvers/components.resolver';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "pages", pathMatch: "full" },
@@ -34,8 +37,10 @@ const routes: Routes = [
       { path: "pages/add", component: AddPageComponent },
       { path: "components", component: ComponentsComponent },
       { path: "components/add", component: AddComponentComponent },
+      { path: "components/:id/preview", component: PreviewComponentComponent, resolve: { findComponent: FindComponentResolver } },
     ], canActivate: [AuthGuard]
   },
+  { path: "**", component: NotFoundComponent }
 
 ];
 

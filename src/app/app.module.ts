@@ -16,6 +16,8 @@ import { ComponentsComponent } from './components/components.component';
 import { AddComponentComponent } from './components/add-component/add-component.component';
 import { RouterModule } from '@angular/router';
 import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
+import { PreviewComponentComponent } from './components/preview-component/preview-component.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
     HeaderComponent,
     ComponentsComponent,
     AddComponentComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    PreviewComponentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
