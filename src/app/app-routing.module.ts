@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { ROUTES, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
@@ -17,37 +17,66 @@ import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
 import { PreviewComponentComponent } from './components/preview-component/preview-component.component';
 import { FindComponentResolver, GetComponentsResolver } from './_resolvers/components.resolver';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PageService } from './_services/page.service';
+import { GetPagesResponse } from './_responses/page.response';
 
-const routes: Routes = [
-  { path: "", redirectTo: "pages", pathMatch: "full" },
+const standardRoutes: Routes = [
   {
-    path: "", children: [
-      { path: "login", component: LoginComponent },
-      { path: "register", component: RegisterComponent },
-      { path: "forgot-password", component: ForgotPasswordComponent },
-      { path: "reset-password", component: ResetPasswordComponent },
-      { path: "email-confirmation", component: EmailConfirmationComponent },
-    ], canActivate: [unauthGuard]
-  },
-  {
-    path: "", children: [
-      { path: "web-builder/:id", component: WebBuilderComponent, resolve: { findPage: FindPageResolver, getComponents: GetComponentsResolver } },
-      { path: "preview/:id", component: PreviewComponent, resolve: { findPage: FindPageResolver } },
-      { path: "pages", component: PagesComponent },
-      { path: "pages/add", component: AddPageComponent },
-      { path: "components", component: ComponentsComponent },
-      { path: "components/add", component: AddComponentComponent },
-      { path: "components/:id/preview", component: PreviewComponentComponent, resolve: { findComponent: FindComponentResolver } },
-    ], canActivate: [AuthGuard]
+    path: "admin", children: [
+      { path: "", redirectTo: "pages", pathMatch: "full" },
+      {
+        path: "", children: [
+          { path: "login", component: LoginComponent },
+          { path: "register", component: RegisterComponent },
+          { path: "forgot-password", component: ForgotPasswordComponent },
+          { path: "reset-password", component: ResetPasswordComponent },
+          { path: "email-confirmation", component: EmailConfirmationComponent },
+        ], canActivate: [unauthGuard]
+      },
+      {
+        path: "", children: [
+          { path: "web-builder/:id", component: WebBuilderComponent, resolve: { findPage: FindPageResolver, getComponents: GetComponentsResolver } },
+          { path: "preview/:id", component: PreviewComponent, resolve: { findPage: FindPageResolver } },
+          { path: "pages", component: PagesComponent },
+          { path: "pages/add", component: AddPageComponent },
+          { path: "components", component: ComponentsComponent },
+          { path: "components/add", component: AddComponentComponent },
+          { path: "components/:id/preview", component: PreviewComponentComponent, resolve: { findComponent: FindComponentResolver } },
+        ], canActivate: [AuthGuard]
+      },
+    ]
   },
   { path: "**", component: NotFoundComponent }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
+  imports: [RouterModule.forRoot(standardRoutes, {
     initialNavigation: 'enabledBlocking'
   })],
+  providers: [
+    {
+      provide: ROUTES,
+      useFactory: () => {
+        let routes: Routes = [];
+        inject(PageService).getPages().subscribe({
+          next: (value: GetPagesResponse) => {
+            const pages = value.data;
+            console.table(pages);
+          },
+          error: (error) => console.log(error),
+          complete: () => console.log("completed...")
+        });
+        routes.push({ path: "deneme", component: LoginComponent });
+
+        return [
+          ...routes,
+          ...standardRoutes
+        ];
+      },
+      multi: true
+    }
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

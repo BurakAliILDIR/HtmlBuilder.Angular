@@ -13,6 +13,6 @@ export class HeaderComponent {
 
   logout() {
     this.jwtService.logout();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/admin/login');
   }
 }

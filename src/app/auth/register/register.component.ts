@@ -33,7 +33,7 @@ export class RegisterComponent {
       error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
       complete: () => 
       {
-        this.router.navigateByUrl('/web-builder');
+        this.router.navigateByUrl('/admin/pages');
         this.toastr.success('Sign up!', "Success")
       }
   });

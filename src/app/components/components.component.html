@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="relative overflow-x-auto">
 
-            <a routerLink="/components/add"
+            <a routerLink="/admin/components/add"
                 class="block text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 my-5 text-center">
                 Yeni Komponent Oluştur
             </a>
@@ -29,7 +29,7 @@
                             {{ component.label }}
                         </th>
                         <td class="px-6 py-4">
-                            <a routerLink="{{ '/components/' + component.id + '/preview' }}"
+                            <a routerLink="{{ '/admin/components/' + component.id + '/preview' }}"
                                 class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer rounded-full hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
                                 Önizle
                             </a>

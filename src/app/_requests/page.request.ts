@@ -4,6 +4,7 @@ export class FindPageRequest {
 
 export class AddPageRequest {
     name: string;
+    route: string;
 }
 
 export class UpdatePageRequest {

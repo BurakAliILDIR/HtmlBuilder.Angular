@@ -17,25 +17,26 @@ export class AddPageComponent {
 
   constructor(private pageService: PageService, private router: Router, private toastr: ToastrService) { }
 
-
   addPageForm = new FormGroup({
     name: new FormControl('', Validators.required),
+    route: new FormControl('', Validators.required),
   });
 
   onSubmit() {
     const request = new AddPageRequest;
     request.name = this.addPageForm.value.name;
+    request.route = this.addPageForm.value.route;
 
     this.pageService.addPage(request).subscribe({
       next: (v: AddPageResponse) => {
-        if (v.status === ResponseStatusEnum.success) {
 
+        if (v.status === ResponseStatusEnum.success) {
           this.toastr.success(v['message'], "Success!");
         }
       },
       error: (e) => this.toastr.error(e.error.Data?.Message, e.error?.Message),
       complete: () => {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/admin/pages');
       }
     });
   }

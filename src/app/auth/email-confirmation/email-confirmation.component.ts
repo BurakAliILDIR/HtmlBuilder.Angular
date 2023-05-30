@@ -22,7 +22,7 @@ export class EmailConfirmationComponent {
         }).subscribe({
           next: (v) => console.log(v),
           error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
-          complete: () => this.toastr.success('Email confirmed!', "Success")
+          complete: () => this.toastr.success('E-mail başarıyla onaylandı!', "Success")
         });
       });
   }
