@@ -63,20 +63,37 @@ const standardRoutes: Routes = [
           next: (value: GetPagesResponse) => {
             const pages = value.data;
             console.table(pages);
+
+            pages.forEach(x => routes.push({ path: x.route, component: ComponentsComponent }));
+
           },
           error: (error) => console.log(error),
-          complete: () => console.log("completed...")
+          complete: () => console.log('Tamamlandı')
         });
-        routes.push({ path: "deneme", component: LoginComponent });
 
         return [
           ...routes,
           ...standardRoutes
         ];
+
       },
       multi: true
     }
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  constructor(private pageService: PageService) {
+    // Rotaları dinamik olarak almak için servisi kullanın
+    this.pageService.getPages().subscribe({
+      next: (value: GetPagesResponse) => {
+        const pages = value.data;
+        console.table(pages);
+
+        pages.forEach(x => standardRoutes.push({ path: x.route, component: ComponentsComponent }));
+      },
+      error: (error) => console.log(error),
+      complete: () => RouterModule.forRoot(standardRoutes)
+    });
+  }
+}
