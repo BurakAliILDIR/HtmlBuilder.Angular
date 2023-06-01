@@ -8,13 +8,9 @@ import { JwtService } from '../_services/jwt.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard  {
+export class AuthGuard {
 
-  constructor(
-    public authService: AuthService,
-    public jwtService: JwtService,
-    public router: Router
-  ) { }
+  constructor(private authService: AuthService, private jwtService: JwtService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,7 +22,7 @@ export class AuthGuard  {
     if (this.jwtService.user) {
       if (this.jwtService.isTokenExpired()) {
         // Should Redirect Sig-In Page
-        this.router.navigateByUrl('/login')
+        this.router.navigateByUrl('/admin/login')
       } else {
         return true;
       }

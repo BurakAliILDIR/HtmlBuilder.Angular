@@ -18,14 +18,14 @@ export class AddPageComponent {
   constructor(private pageService: PageService, private router: Router, private toastr: ToastrService) { }
 
   addPageForm = new FormGroup({
+    id: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
-    route: new FormControl('', Validators.required),
   });
 
   onSubmit() {
     const request = new AddPageRequest;
+    request.id = this.addPageForm.value.id;
     request.name = this.addPageForm.value.name;
-    request.route = this.addPageForm.value.route;
 
     this.pageService.addPage(request).subscribe({
       next: (v: AddPageResponse) => {

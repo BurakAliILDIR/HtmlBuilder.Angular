@@ -1,5 +1,5 @@
-import { NgModule, inject } from '@angular/core';
-import { ROUTES, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
@@ -16,11 +16,9 @@ import { AddComponentComponent } from './components/add-component/add-component.
 import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
 import { PreviewComponentComponent } from './components/preview-component/preview-component.component';
 import { FindComponentResolver, GetComponentsResolver } from './_resolvers/components.resolver';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { PageService } from './_services/page.service';
-import { GetPagesResponse } from './_responses/page.response';
+import { ViewComponent } from './view/view.component';
 
-const standardRoutes: Routes = [
+const routes: Routes = [
   {
     path: "admin", children: [
       { path: "", redirectTo: "pages", pathMatch: "full" },
@@ -46,54 +44,12 @@ const standardRoutes: Routes = [
       },
     ]
   },
-  { path: "**", component: NotFoundComponent }
-
+  { path: ":id", component: ViewComponent, resolve: { findPage: FindPageResolver } }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(standardRoutes, {
-    initialNavigation: 'enabledBlocking'
-  })],
-  providers: [
-    {
-      provide: ROUTES,
-      useFactory: () => {
-        let routes: Routes = [];
-        inject(PageService).getPages().subscribe({
-          next: (value: GetPagesResponse) => {
-            const pages = value.data;
-            console.table(pages);
-
-            pages.forEach(x => routes.push({ path: x.route, component: ComponentsComponent }));
-
-          },
-          error: (error) => console.log(error),
-          complete: () => console.log('Tamamlandı')
-        });
-
-        return [
-          ...routes,
-          ...standardRoutes
-        ];
-
-      },
-      multi: true
-    }
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: []
 })
-export class AppRoutingModule {
-  constructor(private pageService: PageService) {
-    // Rotaları dinamik olarak almak için servisi kullanın
-    this.pageService.getPages().subscribe({
-      next: (value: GetPagesResponse) => {
-        const pages = value.data;
-        console.table(pages);
-
-        pages.forEach(x => standardRoutes.push({ path: x.route, component: ComponentsComponent }));
-      },
-      error: (error) => console.log(error),
-      complete: () => RouterModule.forRoot(standardRoutes)
-    });
-  }
-}
+export class AppRoutingModule {}

@@ -3,8 +3,8 @@ export class FindPageRequest {
 }
 
 export class AddPageRequest {
+    id: string;
     name: string;
-    route: string;
 }
 
 export class UpdatePageRequest {
