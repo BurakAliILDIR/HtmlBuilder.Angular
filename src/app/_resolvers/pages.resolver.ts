@@ -8,7 +8,7 @@ import { FindPageRequest } from "../_requests/page.request";
 export const FindPageResolver: ResolveFn<FindPageResponse> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     const request = new FindPageRequest;
 
-    request.id = route.paramMap.get('id');
-
+    request.id = route.url.toString();
+    
     return inject(PageService).findPage(request);
 };

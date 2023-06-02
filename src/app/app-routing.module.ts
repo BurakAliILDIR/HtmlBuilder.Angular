@@ -44,7 +44,7 @@ const routes: Routes = [
       },
     ]
   },
-  { path: ":id", component: ViewComponent, resolve: { findPage: FindPageResolver } }
+  { path: "**", component: ViewComponent, resolve: { findPage: FindPageResolver } }
 ];
 
 @NgModule({
