@@ -36,7 +36,6 @@ export class AuthGuard {
           return false;
         },
         error: (e) => {
-          console.log(e.error.Data.Message, e.error.Message)
           return false;
         },
         complete: () => {

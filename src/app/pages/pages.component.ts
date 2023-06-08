@@ -28,7 +28,6 @@ export class PagesComponent {
         this.pages = value.data
         console.log(this.pages);
       },
-      error: (error) => console.log(error),
       complete: () => console.log("completed..")
     });
   }
@@ -58,7 +57,6 @@ export class PagesComponent {
               );
             }
           },
-          error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
           complete: async () => {
             await this.getPages();
           }

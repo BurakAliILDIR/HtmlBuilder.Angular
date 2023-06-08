@@ -20,7 +20,6 @@ export class ForgotPasswordComponent {
     console.log(this.forgotPasswordForm.value);
     this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
       next: (v) => console.log(v),
-      error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
       complete: () => this.toastr.success('Send reset password mail.', "Success")
     });
   }

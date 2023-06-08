@@ -21,7 +21,6 @@ export class EmailConfirmationComponent {
           token: params['token'],
         }).subscribe({
           next: (v) => console.log(v),
-          error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
           complete: () => this.toastr.success('E-mail başarıyla onaylandı!', "Success")
         });
       });

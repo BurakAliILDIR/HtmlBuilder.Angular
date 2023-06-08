@@ -19,6 +19,8 @@ import { WebBuilderComponent } from './pages/web-builder/web-builder.component';
 import { PreviewComponentComponent } from './components/preview-component/preview-component.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ViewComponent } from './view/view.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ViewComponent } from './view/view.component';
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

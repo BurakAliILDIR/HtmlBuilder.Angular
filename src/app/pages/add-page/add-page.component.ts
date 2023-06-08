@@ -34,7 +34,6 @@ export class AddPageComponent {
           this.toastr.success(v['message'], "Success!");
         }
       },
-      error: (e) => this.toastr.error(e.error.Data?.Message, e.error?.Message),
       complete: () => {
         this.router.navigateByUrl('/admin/pages');
       }

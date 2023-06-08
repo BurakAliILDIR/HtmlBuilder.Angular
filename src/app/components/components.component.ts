@@ -28,7 +28,6 @@ export class ComponentsComponent {
         this.components = value.data
         console.log(this.components);
       },
-      error: (error) => console.log(error),
       complete: () => console.log("completed..")
     });
   }
@@ -59,7 +58,6 @@ export class ComponentsComponent {
               );
             }
           },
-          error: (e) => this.toastr.error(e.error.Data.Message, e.error.Message),
           complete: async () => {
             await this.getComponents();
           }

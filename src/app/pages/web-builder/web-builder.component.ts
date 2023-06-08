@@ -335,7 +335,6 @@ export class WebBuilderComponent implements OnInit {
         next: (value: BaseResponse) => {
           console.log(value);
         },
-        error: (error) => console.log(error),
         complete: () => console.log("completed..")
       });
     });

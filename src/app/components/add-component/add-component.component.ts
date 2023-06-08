@@ -36,9 +36,8 @@ export class AddComponentComponent {
           this.toastr.success(v['message'], "Success!");
         }
       },
-      error: (e) => this.toastr.error(e.error.Data?.Message, e.error?.Message),
       complete: () => {
-        this.router.navigateByUrl('/components');
+        this.router.navigateByUrl('/admin/components');
       }
     });
   }
