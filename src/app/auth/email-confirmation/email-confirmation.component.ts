@@ -19,10 +19,7 @@ export class EmailConfirmationComponent {
         this.authService.emailConfirmation({
           userId: params['userId'],
           token: params['token'],
-        }).subscribe({
-          next: (v) => console.log(v),
-          complete: () => this.toastr.success('E-mail başarıyla onaylandı!', "Success")
-        });
+        }).subscribe((v) => this.toastr.success('E-mail başarıyla onaylandı!', "Success"));
       });
   }
 }

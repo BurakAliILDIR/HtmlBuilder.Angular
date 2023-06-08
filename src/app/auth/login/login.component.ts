@@ -21,14 +21,10 @@ export class LoginComponent {
   });
 
   onSubmit() {
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (v: BaseResponse) => {
-        if(v.status === ResponseStatusEnum.success){
-          this.jwtService.setToken(v.data);
-          this.toastr.success(v['message'], "Success!");
-        }
-      },
-      complete: () => {
+    this.authService.login(this.loginForm.value).subscribe((v: BaseResponse) => {
+      if(v.status === ResponseStatusEnum.success){
+        this.jwtService.setToken(v.data);
+        this.toastr.success(v['message'], "Başarılı!");
         this.router.navigateByUrl('/admin/pages');
       }
     });

@@ -23,18 +23,12 @@ export class RegisterComponent {
   });
 
   onSubmit() {
-    this.authService.register(this.registerForm.value).subscribe({
-      next: (v) => (v: BaseResponse) => {
-        if(v.status === ResponseStatusEnum.success){
-          this.jwtService.setToken(v.data);
-          this.toastr.success(v['message'], "Success!");
-        }
-      },
-      complete: () => 
-      {
+    this.authService.register(this.registerForm.value).subscribe((v) => (v: BaseResponse) => {
+      if(v.status === ResponseStatusEnum.success){
+        this.jwtService.setToken(v.data);
+        this.toastr.success(v['message'], "Success!");
         this.router.navigateByUrl('/admin/pages');
-        this.toastr.success('Sign up!', "Success")
       }
-  });
+    });
   }
 }

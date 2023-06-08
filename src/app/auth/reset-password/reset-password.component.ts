@@ -37,9 +37,6 @@ export class ResetPasswordComponent implements OnInit {
       ...this.resetPasswordForm.value
     }
 
-    this.authService.resetPassword(data).subscribe({
-      next: (v) => console.log(v),
-      complete: () => this.toastr.success('Reseted password.', "Success")
-    });
+    this.authService.resetPassword(data).subscribe((v) => this.toastr.success('Parolanız başarıyla sıfırlandı.', "Başarılı!"));
   }
 }

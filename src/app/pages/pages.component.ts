@@ -23,12 +23,8 @@ export class PagesComponent {
   }
 
   getPages() {
-    this.pageService.getPages().subscribe({
-      next: (value: GetPagesResponse) => {
-        this.pages = value.data
-        console.log(this.pages);
-      },
-      complete: () => console.log("completed..")
+    this.pageService.getPages().subscribe((value: GetPagesResponse) => {
+      this.pages = value.data
     });
   }
 
@@ -47,21 +43,18 @@ export class PagesComponent {
 
         request.id = page.id;
 
-        this.pageService.deletePage(request).subscribe({
-          next: (v: DeletePageResponse) => {
-            if (v.status === ResponseStatusEnum.success) {
-              Swal.fire(
-                'Başarıyla silindi!',
-                `${page.name} sayfasını sildiniz.`,
-                'success'
-              );
-            }
-          },
-          complete: async () => {
+        this.pageService.deletePage(request).subscribe(async (v: DeletePageResponse) => {
+          if (v.status === ResponseStatusEnum.success) {
+
             await this.getPages();
+            Swal.fire(
+              'Başarıyla silindi!',
+              `${page.name} sayfasını sildiniz.`,
+              'success'
+            );
           }
         });
-        
+
       }
     })
   }

@@ -27,14 +27,10 @@ export class AddPageComponent {
     request.id = this.addPageForm.value.id;
     request.name = this.addPageForm.value.name;
 
-    this.pageService.addPage(request).subscribe({
-      next: (v: AddPageResponse) => {
+    this.pageService.addPage(request).subscribe((v: AddPageResponse) => {
 
-        if (v.status === ResponseStatusEnum.success) {
-          this.toastr.success(v['message'], "Success!");
-        }
-      },
-      complete: () => {
+      if (v.status === ResponseStatusEnum.success) {
+        this.toastr.success(v['message'], "Başarılı!");
         this.router.navigateByUrl('/admin/pages');
       }
     });

@@ -7,6 +7,7 @@ import { UpdatePageRequest } from 'src/app/_requests/page.request';
 import { PageService } from 'src/app/_services/page.service';
 import { ComponentModel } from 'src/app/_models/component.model';
 import { Blocks } from './web-builder.block';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-web-builder',
@@ -22,7 +23,7 @@ export class WebBuilderComponent implements OnInit {
     ...Blocks
   ];
 
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -331,11 +332,8 @@ export class WebBuilderComponent implements OnInit {
       request.html = editor.getHtml();
       request.css = editor.getCss();
 
-      this.pageService.updatePage(request).subscribe({
-        next: (value: BaseResponse) => {
-          console.log(value);
-        },
-        complete: () => console.log("completed..")
+      this.pageService.updatePage(request).subscribe((value: BaseResponse) => {
+        this.toastr.success(value['message'], "Başarılı!");
       });
     });
 

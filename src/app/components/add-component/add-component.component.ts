@@ -29,14 +29,10 @@ export class AddComponentComponent {
     request.category = this.addComponentForm.value.category;
     request.content = this.addComponentForm.value.content;
 
-    this.componentService.addComponent(request).subscribe({
-      next: (v: AddComponentResponse) => {
-        if (v.status === ResponseStatusEnum.success) {
+    this.componentService.addComponent(request).subscribe((v: AddComponentResponse) => {
+      if (v.status === ResponseStatusEnum.success) {
 
-          this.toastr.success(v['message'], "Success!");
-        }
-      },
-      complete: () => {
+        this.toastr.success(v['message'], "Success!");
         this.router.navigateByUrl('/admin/components');
       }
     });

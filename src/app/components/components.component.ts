@@ -23,16 +23,12 @@ export class ComponentsComponent {
   }
 
   getComponents() {
-    this.componentService.getComponents().subscribe({
-      next: (value: GetComponentsResponse) => {
-        this.components = value.data
-        console.log(this.components);
-      },
-      complete: () => console.log("completed..")
+    this.componentService.getComponents().subscribe((value: GetComponentsResponse) => {
+      this.components = value.data
     });
   }
 
-  
+
   delete(component: ComponentModel) {
     Swal.fire({
       title: 'Emin misiniz?',
@@ -48,21 +44,17 @@ export class ComponentsComponent {
 
         request.id = component.id;
 
-        this.componentService.deleteComponent(request).subscribe({
-          next: (v: DeleteComponentResponse) => {
-            if (v.status === ResponseStatusEnum.success) {
-              Swal.fire(
-                'Başarıyla silindi!',
-                `${component.label} komponentini sildiniz.`,
-                'success'
-              );
-            }
-          },
-          complete: async () => {
+        this.componentService.deleteComponent(request).subscribe(async (v: DeleteComponentResponse) => {
+          if (v.status === ResponseStatusEnum.success) {
             await this.getComponents();
+            Swal.fire(
+              'Başarıyla silindi!',
+              `${component.label} komponentini sildiniz.`,
+              'success'
+            );
           }
         });
-        
+
       }
     })
   }

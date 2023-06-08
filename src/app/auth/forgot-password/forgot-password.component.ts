@@ -18,9 +18,6 @@ export class ForgotPasswordComponent {
 
   onSubmit() {
     console.log(this.forgotPasswordForm.value);
-    this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
-      next: (v) => console.log(v),
-      complete: () => this.toastr.success('Send reset password mail.', "Success")
-    });
+    this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe((v) => this.toastr.success('Parola sıfırlama maili gönderildi.', "Başarılı!"));
   }
 }
