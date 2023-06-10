@@ -23,6 +23,10 @@ export class AddPageComponent {
   });
 
   onSubmit() {
+
+    if (!this.addPageForm.valid)
+      return;
+
     const request = new AddPageRequest;
     request.id = this.addPageForm.value.id;
     request.name = this.addPageForm.value.name;

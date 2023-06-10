@@ -24,6 +24,10 @@ export class AddComponentComponent {
   });
 
   onSubmit() {
+
+    if (!this.addComponentForm.valid)
+      return;
+
     const request = new AddComponentRequest;
     request.label = this.addComponentForm.value.label;
     request.category = this.addComponentForm.value.category;
